@@ -1,0 +1,9 @@
+- project:
+    name: proj-example
+    jobs:
+      - '{name}_test_job':
+          name: list
+          command: 'ls -al'
+      - '{name}_test_job':
+          name: disk
+          command: 'df -h'
