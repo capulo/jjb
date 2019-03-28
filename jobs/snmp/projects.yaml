@@ -1,5 +1,6 @@
 - project:
-    name: proj-example
+    name: snmp
+    folder: snmp
     jobs:
       - '{name}_test_job':
           name: list
