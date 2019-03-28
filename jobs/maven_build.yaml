@@ -1,5 +1,6 @@
 - job-template:
     name: '{name}_test_job'
+    folder: '{folder}'
     description: 'Automatically generated test'
     project-type: freestyle
     builders:

@@ -6,4 +6,3 @@
       artifactDaysToKeep: -1
       artifactNumToKeep: -1
     pt-gerrit-url: 'ssh://gerrit.pantheon.sk:29418'
-

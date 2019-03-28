@@ -1,0 +1,11 @@
+- job-template:
+    name: '{folder_name}'
+    project-type: folder
+
+- project:
+    name: folders
+    jobs:
+      - '{folder_name}':
+          folder_name:
+              - snmp
+              - test
