@@ -1,8 +1,35 @@
 - job-template:
-    name: '{name}_test_job'
+    name: '{project}_maven_build'
     folder: '{folder}'
     description: 'Automatically generated test'
-    project-type: freestyle
-    builders:
-      - shell: '{command}'
+    project-type: 'freestyle'
+    node: 'build'
 
+    triggers:
+    - every_hour
+
+    builders:
+    - create_settings_xml
+    - copy_settings_xml:
+        source: settings.xml
+    - shell: |-
+        export
+        pwd
+        df -h
+        free -h
+        ls -al
+
+        java -version
+        mvn -version
+
+        mkdir -p ~/.m2
+        cp settings.xml ~/.m2/settings.xml
+
+        mvn clean install -DskipTests
+
+    scm:
+    - git:
+        branches:
+        - '*/master'
+        credentials-id: 'gerrit-lab-jenkins'
+        url: '{pt-gerrit-url}/{project}'

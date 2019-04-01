@@ -1,5 +1,9 @@
+- defaults:
+    name: nothing
+
 - job-template:
     name: '{folder_name}'
+    defaults: nothing
     project-type: folder
 
 - project:
@@ -7,5 +11,4 @@
     jobs:
       - '{folder_name}':
           folder_name:
-              - snmp
-              - test
+              - topoapps-snmp

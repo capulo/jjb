@@ -1,8 +1,10 @@
 - defaults:
     name: global
-    logrotate:
-      daysToKeep: 30
-      numToKeep: 5
-      artifactDaysToKeep: -1
-      artifactNumToKeep: -1
     pt-gerrit-url: 'ssh://gerrit.pantheon.sk:29418'
+    properties:
+      - build-discarder:
+          days-to-keep: 30
+          num-to-keep: 10
+    wrappers:
+    - timestamps
+

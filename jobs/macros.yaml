@@ -1,0 +1,68 @@
+- trigger:
+    name: every_hour
+    triggers:
+    - timed: 'H * * * * '
+
+- trigger:
+    name: every_day
+    triggers:
+    - timed: 'H H * * * '
+
+- builder:
+    name: create_settings_xml
+    builders:
+    - shell: |-
+        cat <<EOF >settings.xml
+        <!--
+        Copyright (c) 2018 Pantheon Technologies s.r.o. All Rights Reserved.
+        This Source Code Form is subject to the terms of the LIGHTY.IO LICENSE,
+        version 1.1. If a copy of the license was not distributed with this file,
+        You can obtain one at https://lighty.io/license/1.1/
+        -->
+        <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+        <profiles>
+        <profile>
+        <id>pantheon-nexus-repo</id>
+        <repositories>
+        <repository>
+        <id>PT_LODL_NEXUS</id>
+        <name>pantheon LODL repository</name>
+        <url>http://10.10.19.41:8081/repository/lodl-maven-group/</url>
+        <releases>
+        <enabled>true</enabled>
+        </releases>
+        <snapshots>
+        <enabled>true</enabled>
+        </snapshots>
+        </repository>
+        </repositories>
+        <pluginRepositories>
+        <pluginRepository>
+        <id>PT_LODL_NEXUS</id>
+        <name>pantheon LODL repository</name>
+        <url>http://10.10.19.41:8081/repository/lodl-maven-group/</url>
+        <releases>
+        <enabled>true</enabled>
+        </releases>
+        <snapshots>
+        <enabled>true</enabled>
+        </snapshots>
+        </pluginRepository>
+        </pluginRepositories>
+        </profile>
+        </profiles>
+        <activeProfiles>
+        <activeProfile>pantheon-nexus-repo</activeProfile>
+        </activeProfiles>
+        </settings>
+        EOF
+
+- builder:
+    name: copy_settings_xml
+    builders:
+    - shell: |-
+        mkdir -p ~/.m2
+        cp {source} ~/.m2/settings.xml
+

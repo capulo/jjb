@@ -1,0 +1,7 @@
+- project:
+    name: topoapps-snmp
+    project: topoapps-snmp
+    folder: '{project}'
+    jobs:
+      - '{project}_maven_build':
+          command: 'ls -al'
