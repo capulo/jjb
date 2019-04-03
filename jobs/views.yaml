@@ -1,0 +1,23 @@
+- view-template:
+    name: '{view_name}'
+    view-type: list
+    columns:
+      - status
+      - weather
+      - job
+      - last-success
+      - last-failure
+      - last-duration
+      - build-button
+    filter-executors: false
+    filter-queue: false
+    project-type: listview
+    recurse: true
+    regex: '.*{view_name}_.*'
+
+- project:
+    name: views
+    views:
+      - '{view_name}':
+          view_name:
+              - 'topoapps-snmp'

@@ -1,3 +1,12 @@
+- scm:
+    name: pt-gerrit
+    scm:
+    - git:
+        branches:
+        - '*/master'
+        credentials-id: 'gerrit-lab-jenkins'
+        url: '{pt-gerrit-url}/{project}'
+
 - trigger:
     name: every_hour
     triggers:
@@ -66,3 +75,29 @@
         mkdir -p ~/.m2
         cp {source} ~/.m2/settings.xml
 
+- builder:
+    name: get_slave_info
+    builders:
+    - shell: |-
+        pwd
+        whoami
+        df -h
+        free -h
+        lscpu
+        export
+        dmesg -T | tail
+        ls -al
+        java -version
+        mvn -version
+
+- builder:
+    name: maven_build_without_tests
+    builders:
+    - shell: |-
+        mvn clean install -DskipTests
+
+- builder:
+    name: maven_build_with_tests
+    builders:
+    - shell: |-
+        mvn clean install

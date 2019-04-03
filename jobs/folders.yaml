@@ -11,4 +11,5 @@
     jobs:
       - '{folder_name}':
           folder_name:
-              - topoapps-snmp
+              - 'topoapps-snmp'
+
